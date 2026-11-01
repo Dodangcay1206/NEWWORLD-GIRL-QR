@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2d">
+  <title>TRẠM TRĂNG TREO | Bảng thành viên</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1220;
+      --panel: #111d31;
+      --panel-2: #172640;
+      --line: #273954;
+      --text: #edf4ff;
+      --muted: #9eb0ca;
+      --accent: #79b9ff;
+      --mint: #8ce7d9;
+      --shadow: 0 14px 34px rgba(0,0,0,.22);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(900px 400px at 10% -10%, #1c3557 0%, transparent 60%), var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 52px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:26px; }
+    .brand { display:flex; align-items:center; gap:13px; min-width:0; }
+    .brand-mark { width:46px; height:46px; display:grid; place-items:center; flex:0 0 auto; border:1px solid #416184; border-radius:14px; background:linear-gradient(145deg,#1d3b5d,#14243c); font-size:24px; }
+    .brand h1 { margin:0; font-size:clamp(19px,3vw,26px); letter-spacing:.08em; line-height:1.2; }
+    .brand p { margin:5px 0 0; color:var(--muted); font-size:12px; letter-spacing:.14em; }
+    .actions { display:flex; align-items:center; gap:9px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border:1px solid var(--line); border-radius:11px; color:var(--text); background:#17243a; transition:.18s ease; }
+    .btn:hover { border-color:#5e8bbd; background:#1d304c; }
+    .btn:disabled { opacity:.55; cursor:wait; }
+    .hero { padding:28px; border:1px solid #2b4668; border-radius:20px; background:linear-gradient(120deg,rgba(30,59,91,.94),rgba(17,29,49,.96)); box-shadow:var(--shadow); margin-bottom:22px; }
+    .eyebrow { color:var(--mint); font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+    .hero h2 { margin:10px 0 8px; font-size:clamp(24px,4vw,36px); letter-spacing:.03em; }
+    .hero p { max-width:650px; margin:0; color:#c0d0e5; line-height:1.65; }
+    .toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:13px 15px; margin-bottom:16px; border:1px solid var(--line); border-radius:14px; background:rgba(17,29,49,.86); }
+    .crumbs { display:flex; align-items:center; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:14px; }
+    .crumb { padding:0; color:var(--accent); border:0; background:none; }
+    .crumb:hover { text-decoration:underline; }
+    .search { width:min(260px,100%); padding:10px 12px; border:1px solid var(--line); border-radius:10px; outline:none; background:#0d1728; color:var(--text); }
+    .search:focus { border-color:#6ea9e8; }
+    .section-heading { display:flex; align-items:end; justify-content:space-between; gap:12px; margin:24px 2px 13px; }
+    .section-heading h3 { margin:0; font-size:17px; }
+    .section-heading span { color:var(--muted); font-size:12px; }
+    .group-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(225px,1fr)); gap:13px; }
+    .group-card { display:flex; align-items:center; gap:14px; width:100%; min-height:94px; padding:17px; text-align:left; border:1px solid var(--line); border-radius:15px; background:linear-gradient(145deg,#172741,#111d31); color:var(--text); box-shadow:0 8px 22px rgba(0,0,0,.12); transition:transform .18s,border-color .18s,background .18s; }
+    .group-card:hover { transform:translateY(-2px); border-color:#5c88b7; background:#1b2e4a; }
+    .folder-icon { width:47px; height:47px; display:grid; place-items:center; flex:0 0 auto; border-radius:13px; background:#203b5a; font-size:25px; }
+    .group-card strong { display:block; font-size:15px; overflow-wrap:anywhere; }
+    .group-card small { display:block; margin-top:5px; color:var(--muted); }
+    .member-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(245px,1fr)); gap:15px; }
+    .member-card { overflow:hidden; border:1px solid var(--line); border-radius:17px; background:linear-gradient(160deg,#172640,#101b2e); box-shadow:var(--shadow); }
+    .member-head { display:flex; align-items:center; gap:12px; min-height:78px; padding:15px 16px; border-bottom:1px solid rgba(91,119,153,.23); }
+    .avatar { width:43px; height:43px; flex:0 0 auto; display:grid; place-items:center; overflow:hidden; border:1px solid #38516f; border-radius:50%; background:#203a59; color:var(--mint); font-weight:800; }
+    .avatar img { width:100%; height:100%; object-fit:cover; }
+    .member-name { margin:0; font-size:15px; overflow-wrap:anywhere; }
+    .member-type { margin:4px 0 0; color:var(--muted); font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+    .qr-wrap { display:grid; place-items:center; min-height:230px; margin:16px; padding:14px; border-radius:13px; background:#f8fafc; }
+    .qr-wrap img { display:block; width:100%; max-width:205px; max-height:205px; object-fit:contain; }
+    .qr-missing { color:#64748b; text-align:center; font-size:13px; }
+    .station-label { margin:0 16px 16px; padding:10px 11px; border:1px solid rgba(140,231,217,.22); border-radius:9px; background:rgba(140,231,217,.07); color:var(--mint); text-align:center; font-size:11px; font-weight:800; letter-spacing:.12em; overflow-wrap:anywhere; }
+    .empty, .message { padding:28px 18px; border:1px dashed #38516f; border-radius:14px; color:var(--muted); text-align:center; line-height:1.65; }
+    .message.error { border-color:#854b57; color:#ffc2c9; }
+    .footer { margin-top:30px; color:#71839d; text-align:center; font-size:11px; line-height:1.7; }
+    .status { color:var(--muted); font-size:11px; white-space:nowrap; }
+    .loading-dot { display:inline-block; width:7px; height:7px; margin-right:6px; border-radius:50%; background:var(--mint); box-shadow:0 0 9px var(--mint); }
+    @media (max-width:650px) {
+      .shell { width:min(100% - 22px,1120px); padding-top:17px; }
+      .topbar { align-items:flex-start; }
+      .brand-mark { width:40px; height:40px; }
+      .brand p { font-size:10px; }
+      .actions .btn { padding:9px 10px; font-size:12px; }
+      .hero { padding:21px; border-radius:16px; }
+      .toolbar { align-items:flex-start; }
+      .search { width:100%; }
+      .member-grid { grid-template-columns:repeat(auto-fill,minmax( min(100%,230px),1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">☾</div>
+        <div>
+          <h1>TRẠM TRĂNG TREO</h1>
+          <p>COMMUNITY · MEMBER DIRECTORY</p>
+        </div>
+      </div>
+      <div class="actions">
+        <span id="status" class="status">Đang kết nối...</span>
+        <button id="refreshBtn" class="btn" type="button">↻ Làm mới</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">A PLACE TO REMEMBER</div>
+      <h2>BẢNG DANH VỌNG</h2>
+      <p>Nơi lưu giữ tên thành viên, mã QR và dấu ấn của từng trạm. Chọn một nhóm để xem danh sách thành viên.</p>
+    </section>
+
+    <section class="toolbar">
+      <nav id="breadcrumbs" class="crumbs" aria-label="Breadcrumb">
+        <span>▦</span><strong>Danh sách nhóm</strong>
+      </nav>
+      <input id="searchInput" class="search" type="search" placeholder="Tìm tên thành viên..." aria-label="Tìm tên thành viên" hidden>
+    </section>
+
+    <div id="content" aria-live="polite">
+      <div class="message"><span class="loading-dot"></span>Đang tải dữ liệu từ GitHub...</div>
+    </div>
+
+    <footer class="footer">
+      DỮ LIỆU ĐƯỢC ĐỌC TRỰC TIẾP TỪ GITHUB · TỰ KIỂM TRA CẬP NHẬT MỖI 5 PHÚT<br>
+      TRẠM TRĂNG TREO
+    </footer>
+  </main>
+
+  <script>
+    // ================== CẤU HÌNH GITHUB ==================
+    // Thay 3 dòng dưới bằng thông tin repository của bạn.
+    const GITHUB_OWNER = "YOUR_GITHUB_USERNAME";
+    const GITHUB_REPO = "YOUR_REPOSITORY_NAME";
+    const GITHUB_BRANCH = "main";
+    // Thư mục chứa các folder nhóm. Không cần đổi nếu dùng cấu trúc mẫu.
+    const DATA_FOLDER = "groups";
+    // =====================================================
+
+    const API_BASE = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
+    const contentEl = document.getElementById("content");
+    const breadcrumbsEl = document.getElementById("breadcrumbs");
+    const searchInput = document.getElementById("searchInput");
+    const refreshBtn = document.getElementById("refreshBtn");
+    const statusEl = document.getElementById("status");
+
+    let currentGroup = null;
+    let currentMembers = [];
+    let refreshTimer = null;
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[char]));
+    }
+
+    function safeImageUrl(file) {
+      const url = file && file.download_url;
+      if (!url) return "";
+      try {
+        const parsed = new URL(url);
+        return parsed.protocol === "https:" ? parsed.href : "";
+      } catch { return ""; }
+    }
+
+    function encodedPath(path) {
+      return path.split("/").map(encodeURIComponent).join("/");
+    }
+
+    async function githubList(path) {
+      const url = `${API_BASE}/${encodedPath(path)}?ref=${encodeURIComponent(GITHUB_BRANCH)}`;
+      const response = await fetch(url, {
+        headers: { "Accept": "application/vnd.github+json", "Cache-Control": "no-cache" },
+        cache: "no-store"
+      });
+
+      if (response.status === 404) throw new Error("Không tìm thấy thư mục dữ liệu. Hãy kiểm tra tên repository, branch và thư mục groups.");
+      if (response.status === 403) throw new Error("GitHub đang giới hạn số lượt đọc API. Hãy thử lại sau ít phút.");
+      if (!response.ok) throw new Error(`GitHub trả về lỗi ${response.status}. Hãy kiểm tra repository có ở chế độ Public không.`);
+
+      const data = await response.json();
+      if (!Array.isArray(data)) throw new Error("Đường dẫn dữ liệu không phải là một thư mục.");
+      return data;
+    }
+
+    function setStatus(text, busy = false) {
+      statusEl.innerHTML = busy ? `<span class="loading-dot"></span>${escapeHTML(text)}` : escapeHTML(text);
+    }
+
+    function showError(error) {
+      contentEl.innerHTML = `<div class="message error"><strong>Không tải được dữ liệu</strong><br>${escapeHTML(error.message || error)}<br><br>Kiểm tra cấu hình GitHub ở đầu file <code>index.html</code>, repository phải để Public và phải có thư mục <code>${escapeHTML(DATA_FOLDER)}</code>.</div>`;
+      setStatus("Chưa kết nối được");
+    }
+
+    function setHomeBreadcrumb() {
+      breadcrumbsEl.innerHTML = `<span>▦</span><strong>Danh sách nhóm</strong>`;
+    }
+
+    function setGroupBreadcrumb(groupName) {
+      breadcrumbsEl.innerHTML = `<button class="crumb" id="homeCrumb" type="button">Danh sách nhóm</button><span>›</span><strong>${escapeHTML(groupName)}</strong>`;
+      document.getElementById("homeCrumb").addEventListener("click", () => openHome());
+    }
+
+    async function openHome() {
+      currentGroup = null;
+      currentMembers = [];
+      searchInput.hidden = true;
+      searchInput.value = "";
+      setHomeBreadcrumb();
+      await refreshCurrentView();
+    }
+
+    async function openGroup(group) {
+      currentGroup = group;
+      searchInput.hidden = false;
+      searchInput.value = "";
+      setGroupBreadcrumb(group.name);
+      await refreshCurrentView();
+    }
+
+    async function refreshCurrentView() {
+      refreshBtn.disabled = true;
+      setStatus("Đang đồng bộ...", true);
+      try {
+        if (!currentGroup) {
+          const entries = await githubList(DATA_FOLDER);
+          const groups = entries
+            .filter(item => item.type === "dir" && !item.name.startsWith("."))
+            .sort((a, b) => a.name.localeCompare(b.name, "vi", { sensitivity: "base" }));
+          renderGroups(groups);
+        } else {
+          const files = await githubList(currentGroup.path);
+          currentMembers = buildMembers(files);
+          renderMembers();
+        }
+        setStatus(`Đã cập nhật · ${new Date().toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}`);
+      } catch (error) {
+        showError(error);
+      } finally {
+        refreshBtn.disabled = false;
+      }
+    }
+
+    function renderGroups(groups) {
+      if (!groups.length) {
+        contentEl.innerHTML = `<div class="empty">Chưa có nhóm nào.<br>Hãy tạo folder nhóm bên trong <code>${escapeHTML(DATA_FOLDER)}/</code> trên GitHub, sau đó upload ảnh thành viên hoặc mã QR.</div>`;
+        return;
+      }
+
+      contentEl.innerHTML = `
+        <div class="section-heading"><h3>Các nhóm thành viên</h3><span>${groups.length} nhóm</span></div>
+        <div class="group-grid">
+          ${groups.map(group => `
+            <button class="group-card" type="button" data-path="${escapeHTML(group.path)}">
+              <span class="folder-icon">📁</span>
+              <span><strong>${escapeHTML(group.name)}</strong><small>Mở danh sách thành viên →</small></span>
+            </button>
+          `).join("")}
+        </div>`;
+
+      contentEl.querySelectorAll(".group-card").forEach(button => {
+        button.addEventListener("click", () => {
+          const group = groups.find(item => item.path === button.dataset.path);
+          if (group) openGroup(group);
+        });
+      });
+    }
+
+    function isImageFile(name) {
+      return /\.(png|jpe?g|webp|gif|avif)$/i.test(name);
+    }
+
+    function fileBase(name) {
+      return name.replace(/\.[^.]+$/, "");
+    }
+
+    function buildMembers(files) {
+      const images = files.filter(file => file.type === "file" && isImageFile(file.name));
+      const members = new Map();
+
+      for (const file of images) {
+        const base = fileBase(file.name);
+        const isQR = /_QR$/i.test(base);
+        const memberName = isQR ? base.replace(/_QR$/i, "") : base;
+        if (!memberName.trim()) continue;
+        const key = memberName.toLocaleLowerCase("vi-VN");
+        if (!members.has(key)) members.set(key, { name: memberName, photo: "", qr: "" });
+        const member = members.get(key);
+        const imageUrl = safeImageUrl(file);
+        if (isQR) member.qr = imageUrl;
+        else if (!member.photo) member.photo = imageUrl;
+      }
+
+      return [...members.values()].sort((a, b) => a.name.localeCompare(b.name, "vi", { sensitivity: "base" }));
+    }
+
+    function renderMembers() {
+      const query = searchInput.value.trim().toLocaleLowerCase("vi-VN");
+      const members = currentMembers.filter(member => member.name.toLocaleLowerCase("vi-VN").includes(query));
+      const stationName = currentGroup.name;
+
+      if (!currentMembers.length) {
+        contentEl.innerHTML = `<div class="empty">Nhóm này chưa có ảnh thành viên hoặc mã QR.<br>Hãy upload file theo dạng <code>TEN_THANH_VIEN_QR.png</code> vào folder <strong>${escapeHTML(stationName)}</strong>.</div>`;
+        return;
+      }
+      if (!members.length) {
+        contentEl.innerHTML = `<div class="empty">Không tìm thấy thành viên phù hợp.</div>`;
+        return;
+      }
+
+      contentEl.innerHTML = `
+        <div class="section-heading"><h3>${escapeHTML(stationName)}</h3><span>${members.length} thành viên</span></div>
+        <div class="member-grid">
+          ${members.map(member => `
+            <article class="member-card">
+              <div class="member-head">
+                <div class="avatar">${member.photo ? `<img src="${escapeHTML(member.photo)}" alt="Ảnh ${escapeHTML(member.name)}" loading="lazy">` : escapeHTML(member.name.trim().charAt(0).toUpperCase())}</div>
+                <div><h4 class="member-name">${escapeHTML(member.name)}</h4><p class="member-type">THÀNH VIÊN</p></div>
+              </div>
+              <div class="qr-wrap">
+                ${member.qr ? `<img src="${escapeHTML(member.qr)}" alt="Mã QR ${escapeHTML(member.name)}" loading="lazy">` : `<div class="qr-missing">Chưa có mã QR<br><small>Thêm file ${escapeHTML(member.name)}_QR.png</small></div>`}
+              </div>
+              <div class="station-label">TRẠM: ${escapeHTML(stationName)}</div>
+            </article>
+          `).join("")}
+        </div>`;
+    }
+
+    refreshBtn.addEventListener("click", refreshCurrentView);
+    searchInput.addEventListener("input", renderMembers);
+
+    if (GITHUB_OWNER === "YOUR_GITHUB_USERNAME" || GITHUB_REPO === "YOUR_REPOSITORY_NAME") {
+      contentEl.innerHTML = `<div class="message error"><strong>Cần cấu hình GitHub trước khi sử dụng</strong><br>Mở file <code>index.html</code>, tìm phần <code>CẤU HÌNH GITHUB</code> ở gần cuối file, rồi điền username, tên repository và branch của bạn.</div>`;
+      setStatus("Chưa cấu hình");
+    } else {
+      openHome();
+    }
+
+    // Tự kiểm tra lại nội dung hiện tại mỗi 5 phút.
+    refreshTimer = window.setInterval(() => {
+      if (document.visibilityState === "visible" && GITHUB_OWNER !== "YOUR_GITHUB_USERNAME" && GITHUB_REPO !== "YOUR_REPOSITORY_NAME") {
+        refreshCurrentView();
+      }
+    }, 5 * 60 * 1000);
+  </script>
+</body>
+</html>
